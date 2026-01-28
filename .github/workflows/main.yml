@@ -3,7 +3,7 @@ name: SSE CI/CD
 on: [push]
 
 jobs:
-  style_check:
+  clang_check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
