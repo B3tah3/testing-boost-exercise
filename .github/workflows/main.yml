@@ -1,0 +1,13 @@
+name: SSE CI/CD
+
+on: [push]
+
+jobs:
+  clang_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: "Run style check"
+        run: clang-format --dry-run --Werror src/*.cpp src/*.hpp tests/*.cpp
+        
+      
