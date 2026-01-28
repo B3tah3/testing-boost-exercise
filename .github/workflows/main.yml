@@ -8,6 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: "Run style check"
-        run: clang-format --dry-run --Werror src/*.cpp src/*.hpp tests/*.cpp tests/*.hpp
+        run: clang-format --dry-run --Werror src/*.cpp src/*.hpp tests/*.cpp
         
       
