@@ -1,0 +1,36 @@
+name: SSE CI/CD
+
+on: [push]
+
+jobs:
+  style_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: "Run style check"
+        run: clang-format --dry-run --Werror src/*.cpp src/*.hpp tests/*.cpp tests/*.hpp
+        
+      
+  
+  test:
+    # needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.10'
+      - name: "Install pytest and coverage"
+        run: pip install pytest matplotlib numpy coverage
+      - name: "Run pytest"
+        run: python -m pytest
+      - name: "Run coverage"
+        run: python -m coverage run -m pytest
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-artifact
+          path: .coverage
+          retention-days: 1
+          include-hidden-files: true # Necessary if upload contains hidden file.
+    
